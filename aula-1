@@ -1,0 +1,53 @@
+CREATE database segurança;
+
+USE segurança 
+
+CREATE TABLE cliente (
+id INT AUTO_INCREMENT PRIMARY KEY,
+nome varchar(500),
+cpf varchar(15),
+telefone VARCHAR(15),
+endereço VARCHAR(100)
+);
+
+INSERT INTO cliente 
+(nome, cpf, telefone, endereço)
+VALUES
+("sayonara", "777", "99445566", "rua flamengo")
+
+CREATE TABLE venda (
+id INT AUTO_INCREMENT PRIMARY KEY,
+dia DATETIME,
+valor FLOAT
+);
+
+ SELECT * FROM cliente
+ 
+ 
+ CREATE TABLE venda_log (
+ log_id INT AUTO_INCREMENT PRIMARY KEY,
+ old_id INT,
+ old_dia DATETIME,
+ old_valor FLOAT,
+ new_id INT,
+ new_dia DATETIME,
+ new_valor FLOAT,
+ açao VARCHAR(6),
+ usuario VARCHAR(50),
+ hora TIMESTAMP 
+ );
+ 
+ CREATE TRIGGER venda_log_insert AFTER INSERT ON venda 
+ FOR EACH ROW 
+ INSERT INTO venda_log (old_id, old_dia, old_valor, new_id, new_dia, new_valor, açao, usuario, hora)
+ VALUES(NULL, NULL, NULL, NEW.id, NEW.dia, NEW.valor, "insert", USER(), NOW()
+ );
+ 
+ SELECT * FROM venda 
+ 
+ INSERT INTO venda (dia,valor)
+ VALUES 
+ ('2023-09-19', 250.50) 
+ 
+ SELECT * FROM venda_log
+ # banco-de-dados
